@@ -1,0 +1,28 @@
+App\Entity\Event:
+  attributes:
+    id:
+      groups: ['event']
+    title:
+      groups: ['event']
+    type:
+      groups: ['event']
+    beginDate:
+      groups: ['event']
+    endDate:
+      groups: ['event']
+    department:
+      groups: ['event']
+    vocalia:
+      groups: ['event']
+    modality:
+      groups: ['event']
+    description:
+      groups: ['event']
+    dificulty:
+      groups: ['event']
+    url:
+      groups: ['event']
+    image:
+      groups: ['event']
+    outsatnding:
+      groups: ['event']

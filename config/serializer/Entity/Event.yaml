@@ -24,5 +24,5 @@ App\Entity\Event:
       groups: ['event']
     image:
       groups: ['event']
-    outsatnding:
+    outstanding:
       groups: ['event']

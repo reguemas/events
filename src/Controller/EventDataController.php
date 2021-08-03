@@ -21,7 +21,7 @@ class EventDataController extends AbstractController
     } */
 
     /**
-    * @Route("/api/event/events",name="get_all_events")
+    * @Route("/events",name="get_all_events")
     */
     public function listEvents(LoggerInterface $logger, EventRepository $eventRepository)
     {
@@ -41,7 +41,7 @@ class EventDataController extends AbstractController
                 'dificulty' => $event -> getDificulty(),
                 'url' => $event -> getUrl(),
                 'image' => $event -> getImage(),
-                'outsatnding' => $event -> getOutstanding()
+                'outstanding' => $event -> getOutstanding()
             ];
         };
         $logger->info('List action called');
@@ -54,7 +54,7 @@ class EventDataController extends AbstractController
     }
 
     /**
-    * @Route("/api/event/addEvent",name="post_event")
+    * @Route("event/addEvent",name="post_event")
     */
 
     public function createEvent(EntityManagerInterface $em) {
@@ -89,7 +89,7 @@ class EventDataController extends AbstractController
                     'dificulty' => $event -> getDificulty(),
                     'url' => $event -> getUrl(),
                     'image' => $event -> getImage(),
-                    'outsatnding' => $event -> getOutstanding()
+                    'outstanding' => $event -> getOutstanding()
                 ]
             ]
         ]);

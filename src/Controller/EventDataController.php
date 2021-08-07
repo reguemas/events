@@ -41,7 +41,7 @@ class EventDataController extends AbstractController
                 'dificulty' => $event -> getDificulty(),
                 'url' => $event -> getUrl(),
                 'image' => $event -> getImage(),
-                'outstanding' => $event -> getOutstanding()
+                'outstanding' => $event -> getOutsatnding()
             ];
         };
         $logger->info('List action called');
@@ -70,7 +70,7 @@ class EventDataController extends AbstractController
         $event->setDificulty(0);
         $event->setUrl('http:\/\/ce-terrassa.cat\/diada-de-germanor-del-centre-excursionista-de-terrassa-2019\/');
         $event->setImage('http:\/\/ce-terrassa.cat\/wp-content\/uploads\/2019\/08\/Diada-150x150.jpg');
-        $event->setOutstanding(1);
+        $event->setOutsatnding(1);
         $em->persist($event);
         $em->flush();
         $response = new JsonResponse();
@@ -89,7 +89,7 @@ class EventDataController extends AbstractController
                     'dificulty' => $event -> getDificulty(),
                     'url' => $event -> getUrl(),
                     'image' => $event -> getImage(),
-                    'outstanding' => $event -> getOutstanding()
+                    'outsatnding' => $event -> getOutsatnding()
                 ]
             ]
         ]);

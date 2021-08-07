@@ -214,14 +214,14 @@ class Event
         return $this;
     }
 
-    public function getOutstanding(): ?int
+    public function getOutsatnding(): ?int
     {
         return $this->outstanding;
     }
 
-    public function setOutstanding(int $outstanding): self
+    public function setOutsatnding(int $outsatnding): self
     {
-        $this->outstanding = $outstanding;
+        $this->outstanding = $outsatnding;
 
         return $this;
     }

@@ -1,0 +1,27 @@
+# config/validator/validation.yaml
+App\Form\Model\EventDto:
+    properties:
+        title:
+            - NotBlank: ~
+        type:
+            - NotBlank: ~
+        beginDate:
+            - NotBlank: ~
+        endDate:
+            - NotBlank: ~
+        department:
+            - NotBlank: ~
+        vocalia:
+            - NotBlank: ~
+        modality:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+        dificulty:
+            - NotBlank: ~
+        url:
+            - NotBlank: ~
+        image:
+            - NotBlank: ~
+        outsatnding:
+            - NotBlank: ~

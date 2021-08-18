@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
+use League\Flysystem\FilesystemOperator;
 
 class EventsController extends AbstractFOSRestController
 {
@@ -29,12 +30,17 @@ class EventsController extends AbstractFOSRestController
      */
     public function postActions(
         EntityManagerInterface $em,
-        Request $request
+        Request $request,
+        FilesystemOperator $defaultStorage
     ) {
         $eventDto = new EventDto();
         $form = $this->createForm(EventFormType::class, $eventDto);
         $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid()){
+            $extension = explode('/', mime_content_type($eventDto -> image))[1];
+            $data = explode(',', $eventDto -> image);          
+            $filename = sprintf('%s.%s', uniqid('event_', true), $extension);
+            $defaultStorage -> write($filename, base64_decode($data[1]));
             $event = new Event();
             $event -> setTitle($eventDto -> title);
             $event -> setType($eventDto -> type);
@@ -46,7 +52,7 @@ class EventsController extends AbstractFOSRestController
             $event -> setDescription($eventDto -> description);
             $event -> setDificulty($eventDto -> dificulty);
             $event -> setUrl($eventDto -> url);
-            $event -> setImage($eventDto -> image);
+            $event -> setImage($filename);
             $event -> setOutsatnding($eventDto -> outsatnding);
             $em->persist($event);
             $em->flush();

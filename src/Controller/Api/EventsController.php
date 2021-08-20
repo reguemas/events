@@ -6,12 +6,11 @@ use App\Entity\Event;
 use App\Form\Model\EventDto;
 use App\Form\Type\EventFormType;
 use App\Repository\EventRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
-use League\Flysystem\FilesystemOperator;
-
 class EventsController extends AbstractFOSRestController
 {
     /**
@@ -31,16 +30,13 @@ class EventsController extends AbstractFOSRestController
     public function postActions(
         EntityManagerInterface $em,
         Request $request,
-        FilesystemOperator $defaultStorage
+        FileUploader $fileUploader
     ) {
         $eventDto = new EventDto();
         $form = $this->createForm(EventFormType::class, $eventDto);
         $form -> handleRequest($request);
         if ($form -> isSubmitted() && $form -> isValid()){
-            $extension = explode('/', mime_content_type($eventDto -> image))[1];
-            $data = explode(',', $eventDto -> image);          
-            $filename = sprintf('%s.%s', uniqid('event_', true), $extension);
-            $defaultStorage -> write($filename, base64_decode($data[1]));
+            $filename = $fileUploader -> uploaderBase64File($eventDto -> image);
             $event = new Event();
             $event -> setTitle($eventDto -> title);
             $event -> setType($eventDto -> type);

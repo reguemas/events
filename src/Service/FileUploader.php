@@ -13,7 +13,7 @@ class FileUploader {
         $this -> defaultStorage = $defaultStorage;
     }
 
-    public function uploaderBase64File (string $base64File):string
+    public function base64FileUploader (string $base64File):string
     {
         $extension = explode('/', mime_content_type($base64File))[1];
         $data = explode(',', $base64File);          

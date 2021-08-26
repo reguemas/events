@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 class EventsController extends AbstractFOSRestController
 {
     /**
@@ -35,8 +36,10 @@ class EventsController extends AbstractFOSRestController
         $eventDto = new EventDto();
         $form = $this->createForm(EventFormType::class, $eventDto);
         $form -> handleRequest($request);
-        if ($form -> isSubmitted() && $form -> isValid()){
-            $filename = $fileUploader -> uploaderBase64File($eventDto -> image);
+        if (!$form -> isSubmitted()) {
+            return new Response('', Response::HTTP_BAD_REQUEST);
+        }
+        if ($form -> isValid()) {
             $event = new Event();
             $event -> setTitle($eventDto -> title);
             $event -> setType($eventDto -> type);
@@ -48,7 +51,10 @@ class EventsController extends AbstractFOSRestController
             $event -> setDescription($eventDto -> description);
             $event -> setDificulty($eventDto -> dificulty);
             $event -> setUrl($eventDto -> url);
-            $event -> setImage($filename);
+            if ($eventDto -> image) {
+                $filename = $fileUploader -> base64FileUploader($eventDto -> image);
+                $event -> setImage($filename);
+            }
             $event -> setOutsatnding($eventDto -> outsatnding);
             $em->persist($event);
             $em->flush();

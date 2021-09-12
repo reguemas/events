@@ -9,10 +9,15 @@ class EventDto {
     public $endDate;
     public $department;
     public $vocalia;
-    public $modality;
     public $description;
     public $dificulty;
     public $url;
     public $image;
     public $outsatnding;
+    public $modality;
+
+    public function __construct()
+    {
+        $this->modality = [];
+    }
 }

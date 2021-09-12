@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,11 +50,6 @@ class Event
     private $vocalia;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $modality;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
@@ -76,6 +73,16 @@ class Event
      * @ORM\Column(type="integer")
      */
     private $outstanding;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Modality::class, inversedBy="events")
+     */
+    private $modality;
+
+    public function __construct()
+    {
+        $this->modality = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -154,18 +161,6 @@ class Event
         return $this;
     }
 
-    public function getModality(): ?string
-    {
-        return $this->modality;
-    }
-
-    public function setModality(string $modality): self
-    {
-        $this->modality = $modality;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -222,6 +217,30 @@ class Event
     public function setOutsatnding(int $outsatnding): self
     {
         $this->outstanding = $outsatnding;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Modality[]
+     */
+    public function getModality(): Collection
+    {
+        return $this->modality;
+    }
+
+    public function addModality(Modality $modality): self
+    {
+        if (!$this->modality->contains($modality)) {
+            $this->modality[] = $modality;
+        }
+
+        return $this;
+    }
+
+    public function removeModality(Modality $modality): self
+    {
+        $this->modality->removeElement($modality);
 
         return $this;
     }

@@ -14,8 +14,6 @@ App\Entity\Event:
       groups: ['event']
     vocalia:
       groups: ['event']
-    modality:
-      groups: ['event']
     description:
       groups: ['event']
     dificulty:
@@ -25,4 +23,6 @@ App\Entity\Event:
     image:
       groups: ['event']
     outsatnding:
+      groups: ['event']
+    modalities:
       groups: ['event']

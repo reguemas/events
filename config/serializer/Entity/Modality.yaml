@@ -1,0 +1,6 @@
+App\Entity\MOdality:
+  attributes:
+    id:
+      groups: ['event']
+    name:
+      groups: ['event']

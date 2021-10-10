@@ -13,6 +13,7 @@ use App\Repository\EventRepository;
 
 class EventDataController extends AbstractController
 {
+
 /*     private $logger;
 
     public function __construct(LoggerInterface $logger)
@@ -65,7 +66,6 @@ class EventDataController extends AbstractController
         $event->setEndDate(new \DateTime('@'.strtotime('2021-09-15 08:00:00')));
         $event->setDepartment('CET');
         $event->setVocalia('CET');
-        $event->setModality('Trobada');
         $event->setDescription('Els que estimem la nostra entitat, ens trobarem a Sant Llorenç del Munt, amb les persones amb qui compartim la passió per la muntanya.');
         $event->setDificulty(0);
         $event->setUrl('http:\/\/ce-terrassa.cat\/diada-de-germanor-del-centre-excursionista-de-terrassa-2019\/');

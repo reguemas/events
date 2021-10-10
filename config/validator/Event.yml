@@ -13,8 +13,8 @@ App\Form\Model\EventDto:
             - NotBlank: ~
         vocalia:
             - NotBlank: ~
-        modality:
-            - NotBlank: ~
+#        modality:
+#            - NotBlank: ~
         description:
             - NotBlank: ~
         dificulty:
